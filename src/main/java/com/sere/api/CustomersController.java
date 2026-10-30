@@ -16,7 +16,7 @@ public class CustomersController {
     }
 
     @PostMapping("/api/customers")
-    @ResponseStatus(HttpStatus.CREATED)   // sends 201 instead of 200
+    @ResponseStatus(HttpStatus.CREATED)   // sends 201 instead of 2=--['pp00
     public CustomerResponse createCustomer(@RequestBody CreateCustomerRequest request) {
           return new CustomerResponse(1, request.name(), request.phone());
     }
