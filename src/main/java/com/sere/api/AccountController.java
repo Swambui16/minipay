@@ -14,26 +14,22 @@ public class AccountController {
     public record BalanceResponse(long accountId, BigDecimal balance) {}
     public record TransactionResponse(String reference, String type, BigDecimal amount) {}
 
-    // 2. Open an account
     @PostMapping("/api/accounts")
     @ResponseStatus(HttpStatus.CREATED)
     public AccountResponse createAccount(@RequestBody CreateAccountRequest request) {
         return new AccountResponse(1, request.customerId(), request.type(), BigDecimal.ZERO);
     }
 
-    // 3. Deposit
     @PostMapping("/api/accounts/{id}/deposit")
     public BalanceResponse deposit(@PathVariable long id, @RequestBody DepositRequest request) {
         return new BalanceResponse(id, request.amount());
     }
 
-    // 4. Balance
     @GetMapping("/api/accounts/{id}/balance")
     public BalanceResponse getBalance(@PathVariable long id) {
         return new BalanceResponse(id, new BigDecimal("5000.00"));
     }
 
-    // 7. Statement
     @GetMapping("/api/accounts/{id}/transactions")
     public List<TransactionResponse> getTransactions(@PathVariable long id) {
         return List.of(
